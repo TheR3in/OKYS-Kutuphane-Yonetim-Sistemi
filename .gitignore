@@ -1,0 +1,21 @@
+# Derlenmiş Java dosyaları (Sadece kaynak kodlar yüklenmeli)
+*.class
+
+# IDE ve Editör ayarları
+.gemini/
+.agents/
+.antigravity/
+.vscode/
+.idea/
+*.iml
+.eclipse/
+.settings/
+.classpath
+.project
+
+# Log dosyaları
+*.log
+
+# İşletim sistemi kalıntıları
+.DS_Store
+Thumbs.db

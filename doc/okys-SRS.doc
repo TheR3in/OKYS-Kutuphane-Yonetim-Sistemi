@@ -1,0 +1,20 @@
+# OKYS - YAZILIM GEREKSİNİM BELGESİ (SRS)
+
+## 1. Proje Özeti
+OKYS (Online Kütüphane Yönetim Sistemi), üyelerin kitaplara kolayca erişmesini ve kütüphane personelinin süreçleri dijital olarak yönetmesini sağlayan bir konsol platformudur.
+
+## 2. Kullanıcı Rolleri ve Özellikleri
+Sistemde iki temel kullanıcı rolü bulunmaktadır: Üye ve Kütüphane Görevlisi.
+Her kullanıcının sistemde kayıtlı bir benzersiz kullanıcı numarası (ID), adı, e-posta adresi ve şifresi bulunur.
+
+## 3. Sistem Senaryoları (Use Cases)
+- **Üyeler:** Sisteme giriş yaptıktan sonra "Kitap Arama" işlemi gerçekleştirebilir, ilgilendikleri kitapları ödünç alabilir ve mevcut ödünç aldıkları kitapların süresini uzatabilirler.
+- **Kütüphane Görevlisi:** Sisteme yeni kitaplar ekleyebilir, mevcut kitap kopyalarının durumlarını güncelleyebilir ve üyelerin ödünç alma / süre uzatma taleplerini onaylayıp takip edebilir.
+
+## 4. Varlıklar ve Özellikleri (Entities)
+- **Kitap:** Benzersiz bir ISBN numarası, başlık, yazar, yayın yılı ve durum (Ödünç Verilebilir / Ödünç Verildi) bilgilerine sahiptir.
+- **Kitap Kopyası (Fiziksel Kopya):** Bir kitabın kütüphanede birden fazla fiziksel kopyası bulunabilir. Her kopyanın kendine ait bir Barkod Numarası vardır.
+- **Ödünç Kaydı:** Kullanıcılar bir kitabı doğrudan ödünç alamaz, belirli bir Kitap Kopyası üzerinden işlem yapar. Ödünç alınan her kopyanın; sistemde otomatik olarak artan bir işlem numarası, ödünç tarihi, son teslim tarihi ve teslim edildiği tarih bilgilerini tutan bir kaydı oluşturulur.
+
+## 5. Teknik Kısıtlamalar
+Sistem herhangi bir veritabanı (SQL vb.) veya arayüz (GUI) kullanılmadan sadece geçici hafızada (List vb.) işlem gören bir konsol prototipi olarak tasarlanacaktır.

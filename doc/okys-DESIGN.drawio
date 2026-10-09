@@ -1,0 +1,146 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="21.1.2" type="device">
+  <diagram id="diagram_1" name="Page-1">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- USE CASE DIAGRAM -->
+        <mxCell id="uc_box" value="Kütüphane Yönetim Sistemi" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="230" height="420" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="actor_uye" value="Üye" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="100" width="30" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="actor_gorevli" value="Kütüphane&#xa;Görevlisi" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="300" width="30" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_1" value="Süre Uzat" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="40" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_2" value="Kitap Ödünç Al" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="95" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_3" value="Kitap Ara / Listele" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="150" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_4" value="Sisteme Giriş Yap" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="205" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_7" value="Ödünç Alınanları Gör" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="260" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_5" value="Ödünç Talebini Onayla" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="315" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_6" value="Kitap Ekle/Güncelle" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="uc_box">
+          <mxGeometry x="40" y="370" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Use Case Connections (Straight Lines) -->
+        <mxCell id="edge_u1" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_uye" target="uc_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u2" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_uye" target="uc_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u3" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_uye" target="uc_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u4" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_uye" target="uc_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u7" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_uye" target="uc_7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge_g1" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_gorevli" target="uc_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_g4" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_gorevli" target="uc_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_g2" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_gorevli" target="uc_5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_g3" style="endArrow=none;html=1;edgeStyle=none;entryX=0;entryY=0.5;" edge="1" parent="1" source="actor_gorevli" target="uc_6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CLASS DIAGRAM -->
+        <mxCell id="class_kullanici" value="Kullanıcı" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="30" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="class_kullanici_attrs" value="- ID: int&#xa;- Ad: String&#xa;- E-posta: String&#xa;- Şifre: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="class_kullanici">
+          <mxGeometry y="26" width="160" height="84" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_uye" value="Üye" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="190" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_gorevli" value="KütüphaneGörevlisi" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="190" width="170" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_kitap" value="Kitap" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="960" y="30" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="class_kitap_attrs" value="- ISBN: String&#xa;- Başlık: String&#xa;- Yazar: String&#xa;- YayınYılı: int&#xa;- Durum: String&#xa;+ oduncIste(t: Object): boolean&#xa;+ kitapBilgisi(): String&#xa;+ kopyaEkle(kopya: KitapKopyasi)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="class_kitap">
+          <mxGeometry y="26" width="220" height="124" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_kopya" value="KitapKopyası" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="970" y="220" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="class_kopya_attrs" value="- barkodNo: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="class_kopya">
+          <mxGeometry y="26" width="200" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_odunc" value="OduncKaydi" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="320" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="class_odunc_attrs" value="- islemSayaci: int&#xa;- İşlemNo: int&#xa;- ÖdünçTarihi: String&#xa;- SonTeslimTarihi: String&#xa;- TeslimTarihi: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="class_odunc">
+          <mxGeometry y="26" width="200" height="84" as="geometry" />
+        </mxCell>
+
+        <mxCell id="class_main" value="Main (Kütüphane Sistemi)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="470" width="380" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="class_main_attrs" value="- kullanicilar: List&lt;Kullanici&gt;&#xa;- kitaplar: List&lt;Kitap&gt;&#xa;- oduncKayitlari: List&lt;OduncKaydi&gt;&#xa;- beklemedekiTalepler: List&lt;OduncKaydi&gt;&#xa;- uzatmaTalepleri: List&lt;OduncKaydi&gt;&#xa;- uyeKitapIstekGecmisi: List&lt;String&gt;&#xa;+ sistemiBaslat(): void&#xa;+ uyeMenusu(uye: Uye): void&#xa;+ gorevliMenusu(gorevli: KutuphaneGorevlisi): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="class_main">
+          <mxGeometry y="26" width="380" height="174" as="geometry" />
+        </mxCell>
+
+        <!-- Class Inheritance Connections -->
+        <mxCell id="edge_inh1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0.5;exitY=0;entryX=0.25;entryY=1;" edge="1" parent="1" source="class_uye" target="class_kullanici">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_inh2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0.5;exitY=0;entryX=0.75;entryY=1;" edge="1" parent="1" source="class_gorevli" target="class_kullanici">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Class Composition Connection -->
+        <mxCell id="edge_comp" value="1..* fizikselKopyalar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=diamond;startFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_kitap" target="class_kopya">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Class Association Connections -->
+        <mxCell id="edge_assoc1" value="0..* okudugumKitaplar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="class_odunc" target="class_uye">
+          <mxGeometry x="-0.4" y="-15" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="edge_assoc2" value="0..* oduncListesi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="class_odunc" target="class_kopya">
+          <mxGeometry x="-0.4" y="-15" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
