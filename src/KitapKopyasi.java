@@ -2,36 +2,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitapKopyasi {
-    private String barkodNo; // Görsel 7'deki UML çizimine istinaden barkod -> barkodNo yapıldı.
-    
-    // UML Diyagramındaki oduncListesi (0..*) ilişkisi
-    private List<OduncKaydi> oduncListesi;
+    private final String barkod;
+    private final Kitap kitap;
+    private KitapDurumu durum;
+    private final List<OduncAlma> oduncAlmalar = new ArrayList<>();
 
-    // Default Constructor
-    public KitapKopyasi() {
-        this.oduncListesi = new ArrayList<>();
+    // Constructor (Slayt 5'teki hocanın yazdığı kodla birebir)
+    public KitapKopyasi(String barkod, Kitap kitap) {
+        if (barkod == null || barkod.trim().isEmpty()) {
+            throw new IllegalArgumentException("Barkod boş olamaz.");
+        }
+        if (kitap == null) {
+            throw new IllegalArgumentException("Kitap bilgisi boş olamaz.");
+        }
+        this.barkod = barkod;
+        this.kitap = kitap;
+        // Yeni oluşturulan kopya başlangıçta mevcut
+        this.durum = KitapDurumu.MEVCUT;
+        
+        // Çift yönlü ilişki: kopya oluşturulunca kitaba kendisini otomatik ekler
+        kitap.kitapKopyasiEkle(this);
     }
 
-    // Parametreli Constructor
-    public KitapKopyasi(String barkodNo) {
-        this.barkodNo = barkodNo;
-        this.oduncListesi = new ArrayList<>();
+    public String getBarkod() {
+        return barkod;
     }
 
-    // Getters and Setters
+    // Geriye dönük uyumluluk için alias
     public String getBarkodNo() {
-        return barkodNo;
+        return barkod;
     }
 
-    public void setBarkodNo(String barkodNo) {
-        this.barkodNo = barkodNo;
+    public Kitap getKitap() {
+        return kitap;
     }
 
-    public List<OduncKaydi> getOduncListesi() {
-        return oduncListesi;
+    public KitapDurumu getDurum() {
+        return durum;
     }
 
-    public void setOduncListesi(List<OduncKaydi> oduncListesi) {
-        this.oduncListesi = oduncListesi;
+    public void setDurum(KitapDurumu durum) {
+        if (durum == null) {
+            throw new IllegalArgumentException("Kitap durumu boş olamaz.");
+        }
+        this.durum = durum;
+    }
+
+    public List<OduncAlma> getOduncAlmalar() {
+        return oduncAlmalar;
+    }
+
+    // UML diyagramındaki oduncListesi ile uyumluluk için alias
+    public List<OduncAlma> getOduncListesi() {
+        return oduncAlmalar;
+    }
+
+    public void oduncEkle(OduncAlma odunc) {
+        if (odunc != null && !oduncAlmalar.contains(odunc)) {
+            oduncAlmalar.add(odunc);
+        }
     }
 }

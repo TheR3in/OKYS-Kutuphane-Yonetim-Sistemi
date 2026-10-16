@@ -2,64 +2,83 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kitap {
-    private String isbn;
+    private final String isbn;
     private String baslik;
     private String yazar;
     private int yayinYili;
-    private String durum;
-    
-    // Composition (Kompozisyon) ilişkisi (1..*)
-    private List<KitapKopyasi> fizikselKopyalar;
+    private final List<KitapKopyasi> fizikselKopyalar = new ArrayList<>();
 
-    // Default Constructor
-    public Kitap() {
-        this.fizikselKopyalar = new ArrayList<>();
-    }
-
-    // Parametreli Constructor
-    public Kitap(String isbn, String baslik, String yazar, int yayinYili, String durum) {
+    // Constructor (Zorunlu alanlar ve validasyon)
+    public Kitap(String isbn, String baslik, String yazar, int yayinYili) {
+        if (isbn == null || isbn.trim().isEmpty()) {
+            throw new IllegalArgumentException("ISBN bilgisi boş olamaz.");
+        }
+        if (baslik == null || baslik.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kitap başlığı boş olamaz.");
+        }
         this.isbn = isbn;
         this.baslik = baslik;
         this.yazar = yazar;
         this.yayinYili = yayinYili;
-        this.durum = durum;
-        this.fizikselKopyalar = new ArrayList<>();
     }
 
-    // Kopya ekleme metodu
-    public void kopyaEkle(KitapKopyasi kopya) {
-        if (kopya != null) {
-            this.fizikselKopyalar.add(kopya);
+    // Slayt 5'teki metot: Çift yönlü ilişki ve güvenlik kontrolü
+    public void kitapKopyasiEkle(KitapKopyasi kopya) {
+        if (kopya == null) {
+            throw new IllegalArgumentException("Kitap kopyası boş olamaz.");
+        }
+        if (kopya.getKitap() != this) {
+            throw new IllegalArgumentException("Bu kitap kopyası başka bir kitaba ait.");
+        }
+        if (!fizikselKopyalar.contains(kopya)) {
+            fizikselKopyalar.add(kopya);
         }
     }
 
-    // Görsel 7 UML çiziminde istenilen oduncIste(t) metodu
+    // Geriye dönük uyumluluk için alias
+    public void kopyaEkle(KitapKopyasi kopya) {
+        kitapKopyasiEkle(kopya);
+    }
+
+    public List<KitapKopyasi> getKopyalar() {
+        return fizikselKopyalar;
+    }
+
+    public List<KitapKopyasi> getFizikselKopyalar() {
+        return fizikselKopyalar;
+    }
+
+    // Ödünç verilebilir (MEVCUT) en az bir kopya var mı kontrolü
     public boolean oduncIste(Object t) {
-        // Eğer kütüphanede o kitaptan kopya varsa ödünç alınabilir (true), yoksa alınamaz (false)
-        return !this.fizikselKopyalar.isEmpty();
+        for (KitapKopyasi k : fizikselKopyalar) {
+            if (k.getDurum() == KitapDurumu.MEVCUT) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    // Görsel 8 Implementation slaytında istenilen kitapBilgisi metodu
+    // Kitap bilgisi metodu
     public String kitapBilgisi() {
-        String tanitim = "ADI: " + this.baslik + " YAZARI: " + this.yazar +
-                         " yayın yılı: " + this.yayinYili + " ISBN: " + this.isbn;
-        return tanitim;
+        return "ADI: " + this.baslik + " | YAZARI: " + this.yazar +
+               " | YAYIN YILI: " + this.yayinYili + " | ISBN: " + this.isbn +
+               " | TOPLAM KOPYA: " + this.fizikselKopyalar.size();
     }
 
-    // Getters and Setters
+    // Getters and Setters (Yalnızca mantıklı olanlar)
     public String getIsbn() {
         return isbn;
     }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
+    // isbn 'final' olduğu için setIsbn metodu bilinçli olarak yazılmadı (Immutability).
 
     public String getBaslik() {
         return baslik;
     }
 
     public void setBaslik(String baslik) {
+        if (baslik == null || baslik.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kitap başlığı boş olamaz.");
+        }
         this.baslik = baslik;
     }
 
@@ -77,21 +96,5 @@ public class Kitap {
 
     public void setYayinYili(int yayinYili) {
         this.yayinYili = yayinYili;
-    }
-
-    public String getDurum() {
-        return durum;
-    }
-
-    public void setDurum(String durum) {
-        this.durum = durum;
-    }
-
-    public List<KitapKopyasi> getFizikselKopyalar() {
-        return fizikselKopyalar;
-    }
-
-    public void setFizikselKopyalar(List<KitapKopyasi> fizikselKopyalar) {
-        this.fizikselKopyalar = fizikselKopyalar;
     }
 }

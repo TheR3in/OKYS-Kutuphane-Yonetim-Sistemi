@@ -1,13 +1,21 @@
 # Online Kütüphane Yönetim Sistemi (OKYS)
 
-Bu proje, **YBS203 Nesne Yönelimli Programlama** dersi kapsamında geliştirilmiş, konsol (terminal) tabanlı interaktif bir kütüphane otomasyon sistemidir. Sistem, üyelerin kitap arama ve ödünç alma süreçlerini dijitalleştirirken, kütüphane görevlilerinin de bu süreçleri (onaylama, kitap ekleme, süre uzatma vb.) pratik bir şekilde yönetmesine olanak tanır.
+Bu proje, **YBS203 Nesne Yönelimli Programlama** dersi kapsamında geliştirilmiş, konsol (terminal) tabanlı interaktif bir kütüphane otomasyon sistemidir. Sistem, üyelerin kitap arama ve ödünç alma süreçlerini dijitalleştirirken, kütüphane görevlilerinin de bu süreçleri (onaylama, kitap/kopya ekleme, süre uzatma, iade alma vb.) pratik bir şekilde yönetmesine olanak tanır.
 
 ## 🗂️ Proje Yapısı
 
-- **`src/`** : Uygulamanın çalışmasını sağlayan, Java ile yazılmış Nesne Yönelimli (OOP) kaynak kodları burada yer alır.
+- **`src/`** : Uygulamanın çalışmasını sağlayan, Java ile yazılmış Nesne Yönelimli (OOP) kaynak kodları burada yer alır:
+  - `Kitap.java` : Kitap künyesi metaverileri ve fiziksel kopya koleksiyonu.
+  - `KitapKopyasi.java` : Raftaki somut nüsha, barkod ve anlık durum yönetimi.
+  - `KitapDurumu.java` : Kopyanın durumunu tutan tip güvenli Enum (`MEVCUT`, `ODUNCTE`).
+  - `Kullanici.java` : Temel kullanıcı bilgilerini tutan ata (süper) sınıf.
+  - `Uye.java` : Kullanıcıdan türetilen, ödünç alma geçmişine sahip üye sınıfı.
+  - `KutuphaneGorevlisi.java` : Sistem yöneticisi yetkilerine sahip görevli sınıfı.
+  - `OduncAlma.java` : Üye ile KitapKopyasi arasındaki ödünç alma işlem köprüsü (Association Class).
+  - `Main.java` : Rol bazlı dinamik konsol arayüzü ve test verileri.
 - **`doc/`** : 
   - `okys-SRS.doc` : Sistemin yazılım gereksinim analizi ve işleyiş senaryosu.
-  - `okys-DESIGN.drawio` : Sistemin detaylı Sınıf (Class) ve Kullanım Senaryosu (Use Case) UML diyagramlarını içeren tasarım dosyası.
+  - `okys-DESIGN.drawio` : Sistemin detaylı Sınıf (Class) ve Kullanım Senaryosu (Use Case) UML diyagramları.
   - `okys-DESIGN.png` : UML diyagramının görsel (resim) hali.
   - `OKYS_Proje_Raporu.md` : Projenin temel rapor dosyası.
 
@@ -15,12 +23,17 @@ Bu proje, **YBS203 Nesne Yönelimli Programlama** dersi kapsamında geliştirilm
   <img src="doc/okys-DESIGN.png" alt="Sistem UML Tasarımı">
 </p>
 
-## 🚀 Temel Özellikler
+## 🚀 Mimari ve OOP Prensipleri (Uygulama #3 Standartları)
 
-- **Rol Bazlı Erişim Sistemi:** `Üye` ve `Kütüphane Görevlisi` olmak üzere iki farklı kullanıcı tipi ve bu tiplere özel ayrıştırılmış interaktif menüler.
-- **Dinamik Ödünç Alma Döngüsü:** Üyelerin ödünç alma ve süre uzatma isteklerinin önce bir havuza düştüğü, kütüphane yöneticisinin onayından sonra işlemin gerçekleştiği gerçekçi bir iş akışı.
-- **Gelişmiş Kitap Yönetimi:** Sisteme kayıtlı kitapları başlığına göre arama, yeni kitap/fiziksel kopya ekleme ve kitapların raftaki kopyalarını barkodlarıyla beraber takip etme.
-- **Nesne Yönelimli Mimari (OOP):** Kalıtım (Inheritance), Kapsülleme (Encapsulation) ve Birleştirme (Composition) ilkelerinin (Örn: `Kitap` ve `KitapKopyasi` ilişkisi) katı kurallarla uygulandığı temiz kod mimarisi.
+1. **Gelişmiş Kapsülleme (Encapsulation) & Doğrulama (Validation):**
+   - Tüm sınıf değişkenleri `private` olarak tanımlanmıştır.
+   - Constructor ve metotlarda geçersiz/boş değerler (`null` veya boş metin) engellenerek veri bütünlüğü güvence altına alınmıştır.
+2. **Değişmezlik (Immutability):**
+   - Kimlik belirten ve değişmemesi gereken alanlar (`isbn`, `barkod`, `id`, `islemNo`) `final` olarak tanımlanmış, bunlara setter yazılmamıştır.
+3. **Çift Yönlü İlişki (Bidirectional Association):**
+   - `Kitap` ve `KitapKopyasi` sınıfları arasında Slayt 5'te belirtilen model uygulanmıştır. Bir `KitapKopyasi` oluşturulduğu anda constructor'ı aracılığıyla ait olduğu `Kitap` nesnesinin koleksiyonuna kendisini otomatik olarak kaydeder (`kitap.kitapKopyasiEkle(this)`).
+4. **Durum Ayrımı:**
+   - Kitap soyut bir katalog kaydı olduğu için durum bilgisi kitaptan kaldırılarak raftaki fiziksel nüshayı temsil eden `KitapKopyasi` sınıfına `KitapDurumu` enum tipiyle taşınmıştır.
 
 ## 🛠️ Nasıl Çalıştırılır?
 
@@ -42,7 +55,7 @@ Projeyi bilgisayarınızda çalıştırmak için **Java (JDK 8 veya üzeri)** ku
 
 ### 🔑 Test İçin Hazır Giriş Bilgileri (Demo Hesaplar)
 
-Sistemi çalıştırdığınızda hemen test edebilmeniz için içerisine varsayılan hesaplar eklenmiştir. Giriş ekranında aşağıdaki bilgileri kullanabilirsiniz:
+Sistemi çalıştırdığınızda hemen test edebilmeniz için içerisine varsayılan hesaplar eklenmiştir:
 
 **👤 Üye Hesabı (Ödünç Alma & Arama İşlemleri):**
 - **E-posta:** `ahmet@29mayis.edu.tr`
@@ -51,7 +64,3 @@ Sistemi çalıştırdığınızda hemen test edebilmeniz için içerisine varsay
 **🛡️ Kütüphane Görevlisi Hesabı (Onaylama & Kitap Yönetimi):**
 - **E-posta:** `admin@29mayis.edu.tr`
 - **Şifre:** `admin`
-
-## 👨‍💻 Geliştirme Notları
-
-Bu proje, herhangi bir harici veritabanı (SQL) kullanılmadan, bilgilerin programın çalıştığı süre boyunca geçici hafızada (`ArrayList`) tutulduğu bir konsol otomasyonu olarak geliştirilmiştir. Projede yer alan kodlar, `doc` klasöründeki UML Sınıf Diyagramına 1'e 1 sadık kalınarak kodlanmıştır.
